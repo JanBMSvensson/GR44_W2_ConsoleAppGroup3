@@ -205,7 +205,16 @@ namespace ConsoleAppGroup1
             decimal min = (decimal)temperature.Min();
 
             // Write the values to the console.
-            WriteLine($"SUM={sum.ToString("F2").Replace(",", ".")}; AVG1={avg:F0}; AVG2={avg2:F1}; MIN={min}; MAX={temperature.Max()}");
+            WriteLine($"SUM={sum.ToString("F2").Replace(",", ".")}; AVG1={avg:F0}; AVG2={avg2:F1}; MIN={min}; MAX={temperature.Max()} ... using culture {System.Threading.Thread.CurrentThread.CurrentCulture.Name}");
+
+            var OldCult = System.Threading.Thread.CurrentThread.CurrentCulture;
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+
+            // Write the values to the console one more time
+            WriteLine($"SUM={sum.ToString("F2").Replace(",", ".")}, AVG1={avg:F0}, AVG2={avg2:F1}, MIN={min}, MAX={temperature.Max()} ... using culture {System.Threading.Thread.CurrentThread.CurrentCulture.Name}");
+
+            System.Threading.Thread.CurrentThread.CurrentCulture = OldCult;
+
         }
 
 
